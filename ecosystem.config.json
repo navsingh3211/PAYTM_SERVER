@@ -1,0 +1,13 @@
+{
+  "apps": [
+    {
+      "name": "node_v2_6000",
+      "script": "./server.js",
+      "instances": "-1",
+      "exec_mode": "cluster",
+      "env": {
+        "PORT": "8085"
+      }
+    }
+  ]
+}
