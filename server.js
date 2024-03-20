@@ -2,11 +2,13 @@ import express from "express";
 import dotenv from 'dotenv';
 import database from './databse.js';
 import routes from './routes/index.js';
+import cors from 'cors';
 
 const app = express();
 
 dotenv.config('');
 app.use(express.json());
+app.use(cors());
 
 const PORT = process.env.PORT || 8085;
 const MONGO_URL = process.env.MONGO_URL;
