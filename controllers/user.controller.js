@@ -16,7 +16,7 @@ export const registerUser = async (req,res,next)=>{
     /*1.)validate the payload by zod*/
     const payLoadParse = userRegisterValidation.safeParse(body);
     if(!payLoadParse.success){
-      res.status(411).json({
+      res.status(200).json({
         success:false,
         message:payLoadParse.error.errors[0].message
       });
@@ -29,7 +29,7 @@ export const registerUser = async (req,res,next)=>{
     },{_id:1});
     
     if(userCount){
-      res.status(411).json({
+      res.status(200).json({
         message:"User already exists with given email id."
       })
     }
@@ -76,7 +76,7 @@ export const loginUser = async (req,res,next)=>{
     /*1.) validate payload*/
     const payloadParse = userLoginValidation.safeParse(body);
     if(!payloadParse.success){
-      res.status(411).json({
+      res.status(200).json({
         success:false,
         message:payloadParse.error.errors[0].message
       });
@@ -85,7 +85,7 @@ export const loginUser = async (req,res,next)=>{
     /*2.) find user exist with given email or not*/
     const userDetails = await User.findOne({email:body.email,status:true});
     if(!userDetails){
-      res.status(411).json({
+      res.status(200).json({
         success:false,
         message:'Please pass a valid email or password'
       });
@@ -133,7 +133,7 @@ export const updateUserInfo = async( req,res,next)=>{
     /*Validate the payload*/
     const payloadParse = userUpdateValidation.safeParse(body);
     if(!payloadParse.success){
-      res.status(411).json({
+      res.status(200).json({
         success:false,
         message:payloadParse.error.errors[0].message
       });

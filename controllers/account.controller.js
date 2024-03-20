@@ -24,7 +24,7 @@ export const transferMoney = async(req,res)=>{
     /*Payload validation*/
     const validatePayload = transferMoneyValidation.safeParse(body);
     if(!validatePayload.success){
-      res.status(411).json({
+      res.status(200).json({
         success:false,
         message:validatePayload.error.errors[0].message
       });
@@ -38,7 +38,7 @@ export const transferMoney = async(req,res)=>{
     const primeUserAccountBalance = userPrime.balance;
     if(primeUserAccountBalance < body.amount){
       await session.abortTransaction();
-      res.status(400).json({
+      res.status(200).json({
         success:false,
         message:'Insufficient balance.'
       })
@@ -47,7 +47,7 @@ export const transferMoney = async(req,res)=>{
     const toAccount = await Account.findOne({ userId: body.to }).session(session);
     if (!toAccount) {
       await session.abortTransaction();
-      res.status(400).json({
+      res.status(200).json({
           message: "Invalid account"
       });
     }
