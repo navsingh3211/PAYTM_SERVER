@@ -30,6 +30,7 @@ export const registerUser = async (req,res,next)=>{
     
     if(userCount){
       res.status(200).json({
+        success:false,
         message:"User already exists with given email id."
       })
     }
